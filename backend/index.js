@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const parser = require('body-parser');
 const path = require('path');
-const compression = require('compression'); // Add this import
+const compression = require('compression'); // Add compression middleware
 
 // Import Schemas
 const berita = require('./schemas/berita');
@@ -34,7 +34,8 @@ mongoose.connect('mongodb+srv://TAHURA:TAHURA123@tahura.cjtoycf.mongodb.net/TAHU
   .then(() => console.log('MongoDB connected to database: TAHURA'))
   .catch(err => console.error('MongoDB connection error:', err));
 
-// Define API routes
+// Define API routes with streaming for large data
+
 app.get('/api/getFloraDetails/:id', async (req, res) => {
   try {
     const floraId = req.params.id;
@@ -77,30 +78,69 @@ app.get('/api/getBeritaDetails/:id', async (req, res) => {
   }
 });
 
-app.get('/api/getAllFlora', async (req, res) => {
+app.get('/api/getAllFlora', (req, res) => {
   try {
-    const floraData = await flora.find().exec();
-    res.json(floraData);
+    const cursor = flora.find().cursor();
+    res.setHeader('Content-Type', 'application/json');
+    
+    cursor.on('data', (doc) => {
+      res.write(JSON.stringify(doc));
+    });
+    
+    cursor.on('end', () => {
+      res.end();
+    });
+    
+    cursor.on('error', (error) => {
+      console.error('Error streaming flora data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    });
   } catch (error) {
     console.error('Error fetching flora data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-app.get('/api/getAllFauna', async (req, res) => {
+app.get('/api/getAllFauna', (req, res) => {
   try {
-    const faunaData = await fauna.find().exec();
-    res.json(faunaData);
+    const cursor = fauna.find().cursor();
+    res.setHeader('Content-Type', 'application/json');
+    
+    cursor.on('data', (doc) => {
+      res.write(JSON.stringify(doc));
+    });
+    
+    cursor.on('end', () => {
+      res.end();
+    });
+    
+    cursor.on('error', (error) => {
+      console.error('Error streaming fauna data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    });
   } catch (error) {
     console.error('Error fetching fauna data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
 
-app.get('/api/getAllBerita', async (req, res) => {
+app.get('/api/getAllBerita', (req, res) => {
   try {
-    const beritaData = await berita.find().exec();
-    res.json(beritaData);
+    const cursor = berita.find().cursor();
+    res.setHeader('Content-Type', 'application/json');
+    
+    cursor.on('data', (doc) => {
+      res.write(JSON.stringify(doc));
+    });
+    
+    cursor.on('end', () => {
+      res.end();
+    });
+    
+    cursor.on('error', (error) => {
+      console.error('Error streaming berita data:', error);
+      res.status(500).json({ error: 'Internal Server Error' });
+    });
   } catch (error) {
     console.error('Error fetching berita data:', error);
     res.status(500).json({ error: 'Internal Server Error' });

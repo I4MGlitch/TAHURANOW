@@ -1,0 +1,40 @@
+
+
+.tahuraBackground{
+    background-color: white;
+    background-image: url('../../assets/Images/line-background.png');
+    background-repeat: no-repeat;
+    background-size: cover; /* Cover the entire viewport */
+    background-attachment: fixed; /* Fixed background */
+    background-position: center; /* Center the background */
+    padding-top: 2vh;
+}
+
+.detail-page-content{
+    margin-top: 10vh;
+    height: auto;
+}
+
+/* .detail {
+    background-color: white;
+} */
+
+
+.button {
+    display: block;
+    width: 100px; /* Adjust the width as needed */
+    margin: 20px auto 0; /* Center the button and add some top margin */
+    padding: 10px;
+    text-align: center;
+    background-color: #FBFDE7;
+    color: #1C4231;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Remove the default button underline */
+}
+
+.button:hover {
+    background-color: #1C4231;
+    color: #FBFDE7;
+}

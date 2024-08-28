@@ -1,0 +1,38 @@
+<nav class="navbar navbar-expand-lg fixed-top navbar-scrolled">
+  <div class="container">
+    <a class="navbar-brand" routerLink="/">
+      <img src="../../assets/Images/PHDB.png" alt="PHDB" width="50" height="60" class="d-inline-block align-text-top">
+    </a>
+    <a class="navbar-brand title" routerLink="/">TAHURA</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav text-center navbar-font">
+        <li class="nav-item nav-hover">
+          <a class="nav-link" routerLink="/">Home</a>
+        </li>
+        <li class="nav-item nav-hover">
+          <a class="nav-link" routerLink="/flora-page">Flora</a>
+        </li>
+        <li class="nav-item nav-hover">
+          <a class="nav-link" routerLink="/fauna-page">Fauna</a>
+        </li>
+        <li class="nav-item nav-hover">
+          <a class="nav-link" routerLink="/gallery-page">Gallery</a>
+        </li>
+        <li class="nav-item nav-hover">
+          <a class="nav-link" routerLink="/berita-page">Berita</a>
+        </li>
+        <li class="nav-item nav-hover">
+          <a class="nav-link" routerLink="/contact-page">Contact</a>
+        </li>
+      </ul>
+
+      <form class="d-flex ms-auto" (ngSubmit)="onSearch()">
+        <input class="form-control me-2" type="search" placeholder="Search Flora or Fauna" aria-label="Search" [(ngModel)]="searchTerm" name="searchTerm">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+      </form>
+    </div>
+  </div>
+</nav>

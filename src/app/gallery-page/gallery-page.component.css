@@ -1,0 +1,14 @@
+/* GALLERY PAGE */
+
+.gallery-page-background{
+    background-image: url(../../assets/Images/forest-background2-03.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.gallery-content{
+   height: auto;
+}
+
+/* GALLERY PAGE END */

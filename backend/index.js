@@ -3,8 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const parser = require('body-parser');
-const path = require('path');
-const compression = require('compression'); // Add this import
+const path = require('path');  // Tambahkan import untuk modul path
 
 // Import Schemas
 const berita = require('./schemas/berita');
@@ -14,16 +13,12 @@ const flora = require('./schemas/flora');
 // Initialize app
 const app = express();
 
-// CORS Configuration: allow requests from your frontend domain
+// // CORS Configuration: allow requests from your frontend domain
 // const corsOptions = {
 //   origin: 'https://tahura.vercel.app',
 //   optionsSuccessStatus: 200
 // };
-// app.use(cors(corsOptions));
-app.use(cors())
-
-// Compression Middleware
-app.use(compression()); // Add this line
+app.use(cors());
 
 app.use(parser.json());
 
@@ -31,9 +26,10 @@ app.use(parser.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
 // MongoDB Connection using Mongoose
-mongoose.connect('mongodb+srv://mrxstylers:gonzo112233@tahura.ydoqsiv.mongodb.net/')
+mongoose.connect('mongodb+srv://mrxstylers:gonzo112233@tahura.ydoqsiv.mongodb.net/TAHURA')
   .then(() => console.log('MongoDB connected to database: TAHURA'))
   .catch(err => console.error('MongoDB connection error:', err));
+
 
 // Define API routes
 app.get('/api/getFloraDetails/:id', async (req, res) => {
@@ -80,7 +76,7 @@ app.get('/api/getBeritaDetails/:id', async (req, res) => {
 
 app.get('/api/getAllFlora', async (req, res) => {
   try {
-    const floraData = await flora.find().exec();
+    const floraData = await flora.find();
     res.json(floraData);
   } catch (error) {
     console.error('Error fetching flora data:', error);
@@ -90,7 +86,7 @@ app.get('/api/getAllFlora', async (req, res) => {
 
 app.get('/api/getAllFauna', async (req, res) => {
   try {
-    const faunaData = await fauna.find().exec();
+    const faunaData = await fauna.find();
     res.json(faunaData);
   } catch (error) {
     console.error('Error fetching fauna data:', error);
@@ -100,7 +96,7 @@ app.get('/api/getAllFauna', async (req, res) => {
 
 app.get('/api/getAllBerita', async (req, res) => {
   try {
-    const beritaData = await berita.find().exec();
+    const beritaData = await berita.find();
     res.json(beritaData);
   } catch (error) {
     console.error('Error fetching berita data:', error);
@@ -110,7 +106,7 @@ app.get('/api/getAllBerita', async (req, res) => {
 
 // Handle all other requests to serve the Angular frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html')); // Ensure this path is correct
+  res.sendFile(path.join(__dirname, '../public/index.html')); // Pastikan path ini benar
 });
 
 // Start the server

@@ -98,13 +98,24 @@ app.get('/api/getAllFauna', async (req, res) => {
 
 app.get('/api/getAllBerita', async (req, res) => {
   try {
-    const beritaData = await berita.find();
-    res.json(beritaData);
+    const { page = 1, limit = 10 } = req.query;
+    const beritaData = await berita.find()
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .exec();
+    
+    const count = await berita.countDocuments();
+    res.json({
+      beritaData,
+      totalPages: Math.ceil(count / limit),
+      currentPage: page
+    });
   } catch (error) {
     console.error('Error fetching berita data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
+
 
 // Handle all other requests to serve the Angular frontend
 app.get('*', (req, res) => {

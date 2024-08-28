@@ -9,10 +9,10 @@
 }
 
 h4{
-    margin-top: 10px;
+    /* margin-top: 10px; */
     text-align: center;
     font-size:70px;
-    color: white;
-    background-color: #1C4231;
-    border-radius: 15px;
+    color: #1C4231;
+    /* background-color: #1C4231;
+    border-radius: 15px; */
 }

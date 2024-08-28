@@ -3,6 +3,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const parser = require('body-parser');
+const path = require('path');  // Tambahkan import untuk modul path
 
 // Import Schemas
 const berita = require('./schemas/berita');
@@ -11,11 +12,18 @@ const flora = require('./schemas/flora');
 
 // Initialize app
 const app = express();
-app.use(cors());
+
+// CORS Configuration: allow requests from your frontend domain
+const corsOptions = {
+  origin: 'https://tahura.vercel.app',
+  optionsSuccessStatus: 200
+};
+app.use(cors(corsOptions));
+
 app.use(parser.json());
 
 // Serve static files from the "public" directory
-app.use(express.static('public'));
+app.use(express.static(path.join(__dirname, '../public')));
 
 // MongoDB Connection using Mongoose
 mongoose.connect('mongodb+srv://TAHURA:TAHURA123@tahura.cjtoycf.mongodb.net/TAHURA', {
@@ -100,7 +108,7 @@ app.get('/api/getAllBerita', async (req, res) => {
 
 // Handle all other requests to serve the Angular frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html'));
+  res.sendFile(path.join(__dirname, '../public/index.html')); // Pastikan path ini benar
 });
 
 // Start the server

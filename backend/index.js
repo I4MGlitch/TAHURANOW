@@ -15,11 +15,12 @@ const flora = require('./schemas/flora');
 const app = express();
 
 // CORS Configuration: allow requests from your frontend domain
-const corsOptions = {
-  origin: 'https://tahura.vercel.app',
-  optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
+// const corsOptions = {
+//   origin: 'https://tahura.vercel.app',
+//   optionsSuccessStatus: 200
+// };
+// app.use(cors(corsOptions));
+app.use(cors())
 
 // Compression Middleware
 app.use(compression()); // Add this line

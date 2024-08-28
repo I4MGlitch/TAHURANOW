@@ -1,9 +1,8 @@
-// Import dependencies
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const parser = require('body-parser');
-const path = require('path');  // Tambahkan import untuk modul path
+const path = require('path');
 
 // Import Schemas
 const berita = require('./schemas/berita');
@@ -12,24 +11,16 @@ const flora = require('./schemas/flora');
 
 // Initialize app
 const app = express();
-
-// CORS Configuration: allow requests from your frontend domain
-const corsOptions = {
-  origin: 'https://tahura.vercel.app',
-  optionsSuccessStatus: 200
-};
-app.use(cors(corsOptions));
-
+app.use(cors());
 app.use(parser.json());
 
 // Serve static files from the "public" directory
-app.use(express.static(path.join(__dirname, '../public')));
+app.use(express.static('public'));
 
 // MongoDB Connection using Mongoose
 mongoose.connect('mongodb+srv://TAHURA:TAHURA123@tahura.cjtoycf.mongodb.net/TAHURA')
   .then(() => console.log('MongoDB connected to database: TAHURA'))
   .catch(err => console.error('MongoDB connection error:', err));
-
 
 // Define API routes
 app.get('/api/getFloraDetails/:id', async (req, res) => {
@@ -76,8 +67,18 @@ app.get('/api/getBeritaDetails/:id', async (req, res) => {
 
 app.get('/api/getAllFlora', async (req, res) => {
   try {
-    const floraData = await flora.find();
-    res.json(floraData);
+    const { page = 1, limit = 10 } = req.query;
+    const floraData = await flora.find({}, 'name')  // Limit fields
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit))
+      .exec();
+    
+    const count = await flora.countDocuments();
+    res.json({
+      floraData,
+      totalPages: Math.ceil(count / limit),
+      currentPage: parseInt(page)
+    });
   } catch (error) {
     console.error('Error fetching flora data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -86,8 +87,18 @@ app.get('/api/getAllFlora', async (req, res) => {
 
 app.get('/api/getAllFauna', async (req, res) => {
   try {
-    const faunaData = await fauna.find();
-    res.json(faunaData);
+    const { page = 1, limit = 10 } = req.query;
+    const faunaData = await fauna.find({}, 'name')  // Limit fields
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit))
+      .exec();
+    
+    const count = await fauna.countDocuments();
+    res.json({
+      faunaData,
+      totalPages: Math.ceil(count / limit),
+      currentPage: parseInt(page)
+    });
   } catch (error) {
     console.error('Error fetching fauna data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -96,8 +107,18 @@ app.get('/api/getAllFauna', async (req, res) => {
 
 app.get('/api/getAllBerita', async (req, res) => {
   try {
-    const beritaData = await berita.find();
-    res.json(beritaData);
+    const { page = 1, limit = 10 } = req.query;
+    const beritaData = await berita.find({}, 'title')  // Limit fields
+      .limit(parseInt(limit))
+      .skip((parseInt(page) - 1) * parseInt(limit))
+      .exec();
+    
+    const count = await berita.countDocuments();
+    res.json({
+      beritaData,
+      totalPages: Math.ceil(count / limit),
+      currentPage: parseInt(page)
+    });
   } catch (error) {
     console.error('Error fetching berita data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
@@ -106,7 +127,7 @@ app.get('/api/getAllBerita', async (req, res) => {
 
 // Handle all other requests to serve the Angular frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html')); // Pastikan path ini benar
+  res.sendFile(path.join(__dirname, '../public/index.html'));
 });
 
 // Start the server

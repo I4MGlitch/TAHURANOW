@@ -30,7 +30,7 @@ app.use(parser.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
 // MongoDB Connection using Mongoose
-mongoose.connect('mongodb+srv://mrxstylers:mrxstylers@tahura.ydoqsiv.mongodb.net/')
+mongoose.connect('mongodb+srv://mrxstylers:gonzo112233@tahura.ydoqsiv.mongodb.net/')
   .then(() => console.log('MongoDB connected to database: TAHURA'))
   .catch(err => console.error('MongoDB connection error:', err));
 

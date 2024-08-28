@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class BeritaService {
 
-  private baseUrl = 'https://tahuranow.vercel.app';
+  private baseUrl = 'https://tahura.vercel.app';
 
   constructor(private http: HttpClient) {}
 

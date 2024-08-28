@@ -3,7 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const parser = require('body-parser');
-const path = require('path');  // Tambahkan import untuk modul path
+const path = require('path');
+const compression = require('compression'); // Add this import
 
 // Import Schemas
 const berita = require('./schemas/berita');
@@ -20,6 +21,9 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 
+// Compression Middleware
+app.use(compression()); // Add this line
+
 app.use(parser.json());
 
 // Serve static files from the "public" directory
@@ -29,7 +33,6 @@ app.use(express.static(path.join(__dirname, '../public')));
 mongoose.connect('mongodb+srv://TAHURA:TAHURA123@tahura.cjtoycf.mongodb.net/TAHURA')
   .then(() => console.log('MongoDB connected to database: TAHURA'))
   .catch(err => console.error('MongoDB connection error:', err));
-
 
 // Define API routes
 app.get('/api/getFloraDetails/:id', async (req, res) => {
@@ -76,7 +79,7 @@ app.get('/api/getBeritaDetails/:id', async (req, res) => {
 
 app.get('/api/getAllFlora', async (req, res) => {
   try {
-    const floraData = await flora.find();
+    const floraData = await flora.find().exec();
     res.json(floraData);
   } catch (error) {
     console.error('Error fetching flora data:', error);
@@ -86,7 +89,7 @@ app.get('/api/getAllFlora', async (req, res) => {
 
 app.get('/api/getAllFauna', async (req, res) => {
   try {
-    const faunaData = await fauna.find();
+    const faunaData = await fauna.find().exec();
     res.json(faunaData);
   } catch (error) {
     console.error('Error fetching fauna data:', error);
@@ -96,7 +99,7 @@ app.get('/api/getAllFauna', async (req, res) => {
 
 app.get('/api/getAllBerita', async (req, res) => {
   try {
-    const beritaData = await berita.find();
+    const beritaData = await berita.find().exec();
     res.json(beritaData);
   } catch (error) {
     console.error('Error fetching berita data:', error);
@@ -106,7 +109,7 @@ app.get('/api/getAllBerita', async (req, res) => {
 
 // Handle all other requests to serve the Angular frontend
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, '../public/index.html')); // Pastikan path ini benar
+  res.sendFile(path.join(__dirname, '../public/index.html')); // Ensure this path is correct
 });
 
 // Start the server

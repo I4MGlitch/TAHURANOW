@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class FaunaService {
 
-  private baseUrl = 'https://tahuranow.vercel.app/';
+  private baseUrl = 'https://tahuranow.vercel.app';
 
   constructor(private http: HttpClient) {}
 

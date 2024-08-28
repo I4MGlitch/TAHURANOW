@@ -12,7 +12,7 @@ export class BeritaService {
   constructor(private http: HttpClient) {}
 
   getBeritaDetails(id: String): Observable<any> {
-    const url = `${this.baseUrl}/api/getBeritaDetails/${id}`;
+    const url = `${this.baseUrl}/api/getBeritaDetails/${id}`; 
     return this.http.get<any>(url);
   }
   getAllBerita(): Observable<any> {

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 const parser = require('body-parser');
 const path = require('path');
-const compression = require('compression'); // Add compression middleware
+const compression = require('compression'); 
 
 // Import Schemas
 const berita = require('./schemas/berita');
@@ -30,7 +30,7 @@ app.use(parser.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
 // MongoDB Connection using Mongoose
-mongoose.connect('mongodb+srv://TAHURA:TAHURA123@tahura.cjtoycf.mongodb.net/TAHURA')
+mongoose.connect('mongodb+srv://mrxstylers:mrxstylers@tahura.cjtoycf.mongodb.net/TAHURA')
   .then(() => console.log('MongoDB connected to database: TAHURA'))
   .catch(err => console.error('MongoDB connection error:', err));
 

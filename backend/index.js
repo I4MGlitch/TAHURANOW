@@ -26,12 +26,10 @@ app.use(parser.json());
 app.use(express.static(path.join(__dirname, '../public')));
 
 // MongoDB Connection using Mongoose
-mongoose.connect('mongodb+srv://TAHURA:TAHURA123@tahura.cjtoycf.mongodb.net/TAHURA', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true
-})
-.then(() => console.log('MongoDB connected to database: TAHURA'))
-.catch(err => console.error('MongoDB connection error:', err));
+mongoose.connect('mongodb+srv://TAHURA:TAHURA123@tahura.cjtoycf.mongodb.net/TAHURA')
+  .then(() => console.log('MongoDB connected to database: TAHURA'))
+  .catch(err => console.error('MongoDB connection error:', err));
+
 
 // Define API routes
 app.get('/api/getFloraDetails/:id', async (req, res) => {
@@ -98,24 +96,13 @@ app.get('/api/getAllFauna', async (req, res) => {
 
 app.get('/api/getAllBerita', async (req, res) => {
   try {
-    const { page = 1, limit = 10 } = req.query;
-    const beritaData = await berita.find()
-      .limit(limit * 1)
-      .skip((page - 1) * limit)
-      .exec();
-    
-    const count = await berita.countDocuments();
-    res.json({
-      beritaData,
-      totalPages: Math.ceil(count / limit),
-      currentPage: page
-    });
+    const beritaData = await berita.find();
+    res.json(beritaData);
   } catch (error) {
     console.error('Error fetching berita data:', error);
     res.status(500).json({ error: 'Internal Server Error' });
   }
 });
-
 
 // Handle all other requests to serve the Angular frontend
 app.get('*', (req, res) => {

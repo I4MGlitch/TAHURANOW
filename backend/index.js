@@ -1,19 +1,21 @@
-// Tools
+// Import dependencies
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const parser = require('body-parser');
 
-// Schemas
-const berita = require('../backend/schemas/berita');
-const fauna = require('../backend/schemas/fauna');
-const flora = require('../backend/schemas/flora');
+// Import Schemas
+const berita = require('./schemas/berita');
+const fauna = require('./schemas/fauna');
+const flora = require('./schemas/flora');
 
-// Initializing 
+// Initialize app
 const app = express();
 app.use(cors());
 app.use(parser.json());
-app.use(express.static('public'))
+
+// Serve static files from the "public" directory
+app.use(express.static('public'));
 
 // MongoDB Connection using Mongoose
 mongoose.connect('mongodb+srv://TAHURA:TAHURA123@tahura.cjtoycf.mongodb.net/TAHURA', {
@@ -23,8 +25,7 @@ mongoose.connect('mongodb+srv://TAHURA:TAHURA123@tahura.cjtoycf.mongodb.net/TAHU
 .then(() => console.log('MongoDB connected to database: TAHURA'))
 .catch(err => console.error('MongoDB connection error:', err));
 
-
-// Define routes
+// Define API routes
 app.get('/api/getFloraDetails/:id', async (req, res) => {
   try {
     const floraId = req.params.id;
@@ -97,7 +98,12 @@ app.get('/api/getAllBerita', async (req, res) => {
   }
 });
 
-// Server Check
+// Handle all other requests to serve the Angular frontend
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../public/index.html'));
+});
+
+// Start the server
 const PORT = process.env.PORT || 4242;
 app.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);

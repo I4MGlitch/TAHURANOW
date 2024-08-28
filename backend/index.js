@@ -3,7 +3,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const parser = require('body-parser');
-const path = require('path');  // Tambahkan import untuk modul path
+const path = require('path');
+const compression = require('compression');
 
 // Import Schemas
 const berita = require('./schemas/berita');
@@ -19,7 +20,7 @@ const app = express();
 //   optionsSuccessStatus: 200
 // };
 app.use(cors());
-
+app.use(compression());
 app.use(parser.json());
 
 // Serve static files from the "public" directory

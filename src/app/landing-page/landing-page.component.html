@@ -112,10 +112,10 @@
                                     </div>
                                     <div class="col-xl-8 text-justify">
                                         <div class="card-body berita-card text-justify">
-                                            <h5 class="card-title berita-title">{{ berita.title }}</h5>
+                                            <h5 class="card-title berita-title-clamp">{{ berita.title }}</h5>
                                             <p class="card-text"><small class="text-body-secondary">{{ berita.date
                                                     }}</small></p>
-                                            <p class="card-text">{{ berita.short_description }}</p>
+                                            <p class="card-text berita-clamp clamp-hyphens">{{ berita.short_description }}</p>
                                             <div class="d-flex justify-content-end align-items-end">
                                                 <a [routerLink]="'/beritaDetail-page/' + berita._id"
                                                     class="btn btn-readmore">Read More</a>
@@ -131,7 +131,7 @@
                 <div class="col-xl-4">
                     <div class="d-flex justify-content-between align-items-center">
                         <p class="sub-title pt-2">Terkini</p>
-                        <a href="#" class="a-tag">Lihat Semua <i class="fa-solid fa-arrow-right"></i></a>
+                        <a routerLink="/berita-page" class="a-tag">Lihat Semua <i class="fa-solid fa-arrow-right"></i></a>
                     </div>
                     <div class="row">
                         <div class="col-xl-12 col-6 mb-3" *ngFor="let berita of beritas.slice(2, 4)">
@@ -140,10 +140,10 @@
                                     class="img-fluid terkini-image" alt="{{ berita.title }} Image"
                                     (error)="handleImageError($event, beritas)" />
                                 <div class="card-body text-justify">
-                                    <h5 class="card-title berita-title">{{ berita.title }}</h5>
+                                    <h5 class="card-title berita-title-clamp">{{ berita.title }}</h5>
                                     <p class="card-text"><small class="text-body-secondary">{{ berita.date }}</small>
                                     </p>
-                                    <p class="card-text des-clamp">{{ berita.short_description }}</p>
+                                    <p class="card-text berita-clamp clamp-hyphens">{{ berita.short_description }}</p>
                                     <div class="d-flex justify-content-end align-items-end">
                                         <a [routerLink]="'/beritaDetail-page/' + berita._id"
                                             class="btn btn-readmore">Read

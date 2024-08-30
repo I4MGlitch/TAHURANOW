@@ -123,11 +123,24 @@ body{
     font-family: "Exo 2", sans-serif;
     font-optical-sizing: auto;
     font-weight: 600;
-    font-size: 24px;
+    font-size: 26px;
     font-style: normal;
     color: #1C4231;
 }
 
+/* .berita-title {
+    font-size: 24px;
+    font-weight: 600;
+} */
+
+.card-title{
+    font-size: 20px;
+    font-weight: 600;
+}
+.card-text{
+    font-size: 16px;
+    font-family: 400;
+}
 
 .a-tag{
     text-decoration: none;
@@ -135,7 +148,7 @@ body{
 }
 
 .berita-image{
-    width: auto;
+    width: 100%;
     height: 100%;
     border-radius: 5px 0px 0px 5px;
 }
@@ -145,6 +158,44 @@ body{
     height: 30vh;
 }
 
+.artikel-lain {
+    width: 100%;
+    height: 30vh;
+}
+
+@media screen and (max-width: 1200px){
+    .berita-image{
+        height: 30vh;
+        width: 100%;
+    }
+    .terkini-image{
+        height: 30vh;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 768px){
+    .berita-image{
+        height: 20vh;
+        width: 100%;
+    }
+    .terkini-image{
+        height: 20vh;
+        width: 100%;
+    }
+    .artikel-lain {
+        width: 100%;
+        height: 20vh;
+    }
+    .card-title{
+        font-size: 16px;
+        font-weight: 600;
+    }
+    .card-text{
+        font-size: 14px;
+        font-family: 400;
+    }
+}
 
 /* NAVBAR SECTION */
 
@@ -206,6 +257,36 @@ body{
     overflow: hidden;
 }
 
+.berita-title-clamp{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.berita-clamp{
+    display: -webkit-box;
+    -webkit-line-clamp: 5;
+    line-clamp: 5;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+@media screen and (max-width: 1000px){
+    .berita-title-clamp{
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .berita-clamp{
+        -webkit-line-clamp: 3;
+        line-clamp: 3;
+    }
+}
+
+.clamp-hyphens{
+    hyphens: auto;
+}
 
 .card-items {
     position: relative;

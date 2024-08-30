@@ -1,9 +1,9 @@
 /* BERITA DETAIL PAGE */
 
-.berita-title{
+/* .berita-title{
     font-weight: 600;
     font-size: 34px;
-}
+} */
 
 .berita-detail-content{
     padding-top: 25vh;
@@ -15,10 +15,6 @@
     max-height: 60vh;
 }
 
-.artikel-lain{
-    width: 100%;
-    height: 30vh;
-}
 
 /* BERITA DETAIL PAGE END*/
 

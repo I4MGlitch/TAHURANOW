@@ -11,8 +11,184 @@
 h4{
     /* margin-top: 10px; */
     text-align: center;
-    font-size:70px;
+    font-size:40px;
     color: #1C4231;
     /* background-color: #1C4231;
     border-radius: 15px; */
 }
+
+/* CARD HOVER SECTION */
+
+.title-clamp{
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.title-clamp2{
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.card-clamp{
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.des-clamp{
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+
+.card-items {
+    position: relative;
+    box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    overflow: hidden;
+    border-radius: 1rem;
+}
+.intro {
+    height: 180px;
+    width: 100%;
+    padding: 5px;
+    box-sizing: border-box;
+    position: absolute;
+    background: rgb(0,0,0);
+    background: linear-gradient(0deg, rgba(0,0,0,0.8240546218487395) 0%, rgba(0,0,0,0.7456232492997199) 80%, rgba(0,0,0,0.644782913165266) 87%, rgba(0,0,0,0.4767156862745098) 94%, rgba(255,255,255,0) 100%);
+    color: white;   
+    bottom: 0;
+    transition: .5s;
+}
+
+.intro p{
+    font-family: "Exo 2", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+}
+
+.intro-title-panel{
+    height: 80px;
+    margin-top: 10px;
+    padding-left: 10px;
+}
+
+.intro-title {
+    font-size: 28px;
+    font-weight: 600;
+}
+
+.sub-intro-title{
+    font-size: 20px;
+    font-weight: 400;
+    font-style: italic;
+}
+
+.intro-des {
+    padding-left: 10px;
+    font-size: 16px;
+    text-align: justify;
+    padding-right: 10px;
+}
+
+.intro-btn{
+    margin-left: 10px;
+    visibility: hidden;
+    transition: .5s;
+    opacity: 0;
+}
+
+.card-items img{
+    height: 500px;
+    width: 100%;
+}
+
+@media screen and (max-width:1000px) {
+    .card-items img{
+        width: 100%;
+        height: 150px;
+    }
+}
+
+.card-items:hover {
+    cursor: pointer;
+}
+
+.card-items:hover .intro {
+    height: 240px;
+}
+
+@media screen and (max-width: 1200px){
+    .intro{
+        background: rgb(0,0,0);
+background: linear-gradient(0deg, rgba(0,0,0,0.8240546218487395) 0%, rgba(0,0,0,0.7456232492997199) 50%, rgba(0,0,0,0.6223739495798319) 87%, rgba(0,0,0,0.4290966386554622) 94%, rgba(255,255,255,0) 100%);
+    }
+    .card-clamp{
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .intro-title-panel{
+        height: 70px;
+    }
+    .intro{
+        height: 140px;
+    }
+    .card-items:hover .intro {
+        height: 195px;
+    }
+    .intro-title{
+        font-size:22px;
+    }
+    .sub-intro-title{
+        font-size: 18px;
+    }
+    .intro-des{
+        font-size:14px;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .intro{
+        background: rgb(0,0,0);
+        background: linear-gradient(0deg, rgba(0,0,0,0.8240546218487395) 0%, rgba(0,0,0,0.5131302521008403) 86%, rgba(255,255,255,0) 100%);
+    }
+    .intro-title-panel{
+        height: 60px;
+    }
+    .card-clamp{
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+    }
+    .intro{
+        height: 120px;
+    }
+    .card-items:hover .intro {
+        height: 180px;
+    }
+    .intro-title{
+        font-size:20px;
+    }
+    .sub-intro-title{
+        font-size: 16px;
+    }
+    .intro-des{
+        font-size:12px;
+    }
+}
+
+.card-items:hover .intro-btn {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* CARD HOVER END */

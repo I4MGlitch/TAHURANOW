@@ -9,7 +9,7 @@
                     </div>
                     <div class="swiper-container container3 mt-5">
                         <div class="swiper-wrapper">
-                            <div *ngFor="let flora of floras.slice(11, 20)" class="swiper-slide col-4">
+                            <div *ngFor="let flora of floras.slice(1, 5)" class="swiper-slide col-4">
                                 <div class="card-items">
                                     <img [src]="flora.photos.length > 0 ? getImageUrl(flora.photos[0]?.data) : getErrorImageUrl()"
                                         class="img-fluid" alt="{{ flora.name }} Image"
@@ -45,7 +45,7 @@
                     </div>
                     <div class="swiper-container container3 mt-5">
                         <div class="swiper-wrapper">
-                            <div *ngFor="let fauna of faunas.slice(11, 20)" class="swiper-slide col-4">
+                            <div *ngFor="let fauna of faunas.slice(1, 5)" class="swiper-slide col-4">
                                 <div class="card-items">
                                     <img [src]="fauna.photos.length > 0 ? getImageUrl(fauna.photos[0]?.data) : getErrorImageUrl()"
                                         class="img-fluid" alt="{{ fauna.name }} Image"
